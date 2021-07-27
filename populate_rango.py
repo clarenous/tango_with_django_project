@@ -48,17 +48,18 @@ def populate():
             print(f'- {c}: {p}')
 
 
-def add_page(cat, title, url):
+def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url = url
-    p.views = default_views(cat.name)
-    p.likes = default_likes(cat.name)
+    p.views = views
     p.save()
     return p
 
 
 def add_cat(name):
     c = Category.objects.get_or_create(name=name)[0]
+    c.views = default_views(name)
+    c.likes = default_likes(name)
     c.save()
     return c
 
