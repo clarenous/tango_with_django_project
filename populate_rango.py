@@ -30,9 +30,23 @@ def populate():
     other_pages = [{'title': 'Bottle', 'url': 'http://bottlepy.org/docs/dev/'},
                    {'title': 'Flask', 'url': 'http://flask.pocoo.org'}]
 
+    # golang_pages = [{'title': 'The Golang Programming Language', 'url': 'https://golang.org'},
+    #                 {'title': 'Learn Go Programming', 'url': 'https://golangr.com'},
+    #                 {'title': 'Beego Framework', 'url': 'https://beego.me'}]
+    #
+    # rust_pages = [{'title': 'Rust Programming Language', 'url': 'https://www.rust-lang.org'},
+    #               {'title': 'Learning Rust', 'url': 'https://learning-rust.github.io'}]
+    #
+    # swift_pages = [{'title': 'Swift - Apple Developer', 'url': 'https://developer.apple.com/swift/'},
+    #                {'title': 'About Swift', 'url': 'https://docs.swift.org/swift-book/'}]
+
     cats = {'Python': {'pages': python_pages},
             'Django': {'pages': django_pages},
-            'Other Frameworks': {'pages': other_pages}}
+            'Other Frameworks': {'pages': other_pages},
+            # 'Golang': {'pages': golang_pages},
+            # 'Rust': {'pages': rust_pages},
+            # 'Swift': {'pages': swift_pages},
+            }
 
     # If you want to add more categories or pages, # add them to the dictionaries above.
     # The code below goes through the cats dictionary, then adds each category,
@@ -40,7 +54,7 @@ def populate():
     for cat, cat_data in cats.items():
         c = add_cat(cat)
         for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'])
+            add_page(c, p['title'], p['url'], default_views(cat))
 
     # Print out the categories we have added.
     for c in Category.objects.all():
@@ -65,25 +79,27 @@ def add_cat(name):
 
 
 def default_views(cat_name):
-    if cat_name == "Python":
-        return 128
-    elif cat_name == "Django":
-        return 64
-    elif cat_name == "Other Frameworks":
-        return 32
-    else:
-        return 0
+    views_by_names = {
+        "Python": 128,
+        "Django": 64,
+        "Other Frameworks": 32,
+        "Golang": 120,
+        "Rust": 60,
+        "Swift": 20,
+    }
+    return views_by_names[cat_name]
 
 
 def default_likes(cat_name):
-    if cat_name == "Python":
-        return 64
-    elif cat_name == "Django":
-        return 32
-    elif cat_name == "Other Frameworks":
-        return 16
-    else:
-        return 0
+    likes_by_names = {
+        "Python": 64,
+        "Django": 32,
+        "Other Frameworks": 16,
+        "Golang": 70,
+        "Rust": 30,
+        "Swift": 10,
+    }
+    return likes_by_names[cat_name]
 
 
 # Start execution here!
