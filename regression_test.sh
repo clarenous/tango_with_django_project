@@ -14,8 +14,8 @@ fi
 
 TEST_VECTOR_DIR=$WORKDIR/tango_with_django_2_code/progress_tests
 CODE_DIR=rango
-START_CHAPTER=8
-END_CHAPTER=8
+START_CHAPTER=9
+END_CHAPTER=9
 
 for i in $(seq $START_CHAPTER $END_CHAPTER); do
   echo ""
