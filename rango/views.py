@@ -19,10 +19,8 @@ def index(request):
         'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!',
         'categories': category_list,
         'pages': page_list,
-        'visits': int(request.COOKIES.get('visits', '1')),
     }
     visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
     response = render(request, 'rango/index.html', context=context_dict)
     return response
 
